@@ -32,13 +32,26 @@ public class ProcessoSeletivo {
         
         String[] candidatos = { "FELIPE","MÁRCIA","JULIA","PAULO","AUGUSTO","MÔNICA","FABRÍCIO","MIRELA","DANIELA","JORGE" };
         String[] candidatoSelecionado = new String[5];
+        int[] numeroHistorico = new int[5];
+        int numerosGerados = 0;
 
-        for(int i = 0; i <5; i ++) {
-            int numeroSortido = gerador.nextInt(10) + 1;
-            candidatoSelecionado[i] = candidatos[numeroSortido];
-        }
-        for (int i = 0; i < candidatoSelecionado.length; i++) {
-            System.out.println(candidatoSelecionado[i]);
+        while(numerosGerados < 5) {
+            int numeroSortido = gerador.nextInt(9) + 1;
+            boolean estaRepetido = false;
+
+            for(int i = 0; i < numerosGerados; i++) {
+                if(numeroHistorico[i] == numeroSortido) {
+                    estaRepetido = true;
+                    break;
+                }
+            }
+
+            if(!estaRepetido) {
+                candidatoSelecionado[numerosGerados] = candidatos[numeroSortido];
+                System.out.println("Candidato selecionado: " + candidatoSelecionado[numerosGerados]);
+                numeroHistorico[numerosGerados] = numeroSortido;
+                numerosGerados++;
+            }
         }
     }
 }
